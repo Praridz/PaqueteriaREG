@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "587417777318",
+    "project_id": "paqueteriareg",
+    "storage_bucket": "paqueteriareg.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:587417777318:android:3c5d1fb6f83539c1be7067",
+        "android_client_info": {
+          "package_name": "co.edu.udea.compumovil.gr04_20211.paqueteriareg"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "587417777318-739808bteaslbegrc37svkpm5m8p5oas.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCmhanEHKNw1pHVWoWzfeux8CcbspEpmaA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "587417777318-739808bteaslbegrc37svkpm5m8p5oas.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
