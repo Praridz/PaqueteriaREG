@@ -11,7 +11,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PaqueteriaREG">
-        <activity android:name=".MenuActivity"></activity>
+        <activity android:name=".OfertaActivity"></activity>
+        <activity android:name=".CondicionActivity" />
+        <activity android:name=".AdminActivity" />
+        <activity android:name=".PaqueteActivity" />
+        <activity android:name=".MenuActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
