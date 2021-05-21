@@ -5,6 +5,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -21,33 +22,44 @@ import com.skydoves.elasticviews.ElasticCheckButton;
 
 import dmax.dialog.SpotsDialog;
 
-public class AdminActivity extends AppCompatActivity {
-
-    ElasticCheckButton btnEnviar,recuperar;
+public class RegistrarActivity extends AppCompatActivity {
     TextInputEditText email, password;
-    private FirebaseAuth mAuth;
+    private ElasticCheckButton registrar;
+    private ProgressDialog progress;
+    FirebaseAuth auth;
     AlertDialog alerta;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin);
+        setContentView(R.layout.activity_registrar);
+
+        //Titulo centrado de la app Action Bar
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.txt_titulo_nav);
-        mAuth = FirebaseAuth.getInstance();
+
         //Activar boton back
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        recuperar = (ElasticCheckButton) findViewById(R.id.recuperar);
-        btnEnviar = (ElasticCheckButton) findViewById(R.id.btnEnviar);
+        registrar = (ElasticCheckButton) findViewById(R.id.btnRegistrase);
         email = findViewById(R.id.gmail);
         password = findViewById(R.id.password);
 
-        alerta = new SpotsDialog.Builder().setContext(AdminActivity.this).setMessage("Por favor espere....").build();
-        loginAdmin();
+        auth = FirebaseAuth.getInstance();
+
+        progress = new ProgressDialog(this);
+        alerta = new SpotsDialog.Builder().setContext(RegistrarActivity.this).setMessage("Por favor espere....").build();
+        registrar();
     }
-    private void loginAdmin() {
-        btnEnviar.setOnClickListener(new View.OnClickListener() {
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
+    private void registrar() {
+        registrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String userE = email.getText().toString().trim();
@@ -55,21 +67,23 @@ public class AdminActivity extends AppCompatActivity {
                 if(TextUtils.isEmpty(userE)){
                     StyleableToast.makeText(getApplicationContext(), "Ingrese un correo",
                             Toast.LENGTH_LONG, R.style.DemoButton).show();
-                }else if(TextUtils.isEmpty(passE)){
-                    StyleableToast.makeText(getApplicationContext(), "Ingrese una contraseña",
+                }else if(TextUtils.isEmpty(passE) || (passE.length() < 6)){
+                    StyleableToast.makeText(getApplicationContext(), "Ingrese una contraseña de 6 caracteres",
                             Toast.LENGTH_LONG, R.style.DemoButton).show();
                 }else{
                     alerta.show();
-                    mAuth.signInWithEmailAndPassword(userE, passE)
-                            .addOnCompleteListener(AdminActivity.this, new OnCompleteListener<AuthResult>() {
+                    auth.createUserWithEmailAndPassword(userE, passE)
+                            .addOnCompleteListener(RegistrarActivity.this, new OnCompleteListener<AuthResult>() {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if(!task.isSuccessful()){
-                                        StyleableToast.makeText(getApplicationContext(), "Usuario o contraseña Incorrecta",
+                                        StyleableToast.makeText(getApplicationContext(), "Hubo un error creando la cuenta. Es posible que ya haya una cuenta con ese correo.",
                                                 Toast.LENGTH_LONG, R.style.DemoButton).show();
                                     }else{
 
-                                        Intent i = new Intent(AdminActivity.this, MenuAdminActivity.class);
+                                        Intent i = new Intent(RegistrarActivity.this, AdminActivity.class);
+                                        StyleableToast.makeText(getApplicationContext(), "Cuenta creada exitosamente",
+                                                Toast.LENGTH_LONG, R.style.DemoButton).show();
                                         startActivity(i);
                                     }
                                     alerta.dismiss();
@@ -80,20 +94,5 @@ public class AdminActivity extends AppCompatActivity {
                 }
             }
         });
-    }
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
-    }
-    public void getRecuperar(View view) {
-                Intent i = new Intent(AdminActivity.this, RecuperarActivity.class);
-                startActivity(i);
-    }
-
-    public void getRegistrar(View view) {
-        Intent i = new Intent(AdminActivity.this, RegistrarActivity.class);
-        startActivity(i);
     }
 }

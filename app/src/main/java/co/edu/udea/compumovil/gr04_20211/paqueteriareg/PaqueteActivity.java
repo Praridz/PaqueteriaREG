@@ -33,7 +33,11 @@ public class PaqueteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_paquete);
         //Titulo centrado de la app Action Bar
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        getSupportActionBar().setCustomView(R.layout.txt_titulo);
+        getSupportActionBar().setCustomView(R.layout.txt_titulo_nav);
+        //Activar boton back
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         databaseReference = FirebaseDatabase.getInstance().getReference();
         consultarLatLong = (ElasticCheckButton) findViewById(R.id.botton);
         btnGuardar = (ElasticCheckButton) findViewById(R.id.btnEnviar);
@@ -57,22 +61,22 @@ public class PaqueteActivity extends AppCompatActivity {
 
                 if(TextUtils.isEmpty(latitud)){
                     StyleableToast.makeText(getApplicationContext(), "Por favor Pulsar el Boton Generar Ubicacion",
-                            Toast.LENGTH_LONG, R.style.ColoredBackground).show();
+                            Toast.LENGTH_LONG, R.style.DemoButton).show();
                 }else if(TextUtils.isEmpty(logitud)){
                     StyleableToast.makeText(getApplicationContext(), "Por favor Pulsar el Boton Generar Ubicacion",
-                            Toast.LENGTH_LONG, R.style.ColoredBackground).show();
+                            Toast.LENGTH_LONG, R.style.DemoButton).show();
                 }else if(TextUtils.isEmpty(codigo)){
                     StyleableToast.makeText(getApplicationContext(), "Por favor Ingresar un Codigo",
-                            Toast.LENGTH_LONG, R.style.ColoredBackground).show();
+                            Toast.LENGTH_LONG, R.style.DemoButton).show();
                 }else if(TextUtils.isEmpty(telefono)){
                     StyleableToast.makeText(getApplicationContext(), "Por favor Ingresar un numero de Telefono",
-                            Toast.LENGTH_LONG, R.style.ColoredBackground).show();
+                            Toast.LENGTH_LONG, R.style.DemoButton).show();
                 }else{
                     Destinos destinos = new Destinos(Double.valueOf(latitud),Double.valueOf(logitud), codigo, telefono);
 
                     databaseReference.child("destinos").child(codigo).setValue(destinos);
                     StyleableToast.makeText(getApplicationContext(), "Datos Enviados Correctamente",
-                            Toast.LENGTH_LONG, R.style.ColoredBackground).show();
+                            Toast.LENGTH_LONG, R.style.DemoButton).show();
                     Intent i = new Intent(PaqueteActivity.this, MenuActivity.class);
                     startActivity(i);
                     finish();
@@ -113,7 +117,7 @@ public class PaqueteActivity extends AppCompatActivity {
                 int permiso = ContextCompat.checkSelfPermission(PaqueteActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION);
                 locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
                 StyleableToast.makeText(getApplicationContext(), "Ubicacion generada Con exito",
-                        Toast.LENGTH_LONG, R.style.ColoredBackground).show();
+                        Toast.LENGTH_LONG, R.style.DemoButton).show();
             }
         });
     }
@@ -127,5 +131,11 @@ public class PaqueteActivity extends AppCompatActivity {
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
             }
         }
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }

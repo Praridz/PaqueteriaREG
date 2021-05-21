@@ -15,10 +15,4 @@
 
 
     </style>
-    <style name="BaseStyleableToast">
-        <item name="stLength">SHORT</item>
-    </style>
-    <style name="ColoredBackground" parent="BaseStyleableToast">
-        <item name="stColorBackground">#FF5A5F</item>
-    </style>
 </resources>
