@@ -3,8 +3,12 @@ package co.edu.udea.compumovil.gr04_20211.paqueteriareg;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 
@@ -25,6 +29,7 @@ public class MenuAdminActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         irLista();
         irMapa();
+        getLocalizacion();
     }
 
     private void irLista() {
@@ -51,5 +56,14 @@ public class MenuAdminActivity extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
+    }
+    private void getLocalizacion() {
+        int permiso = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION);
+        if(permiso == PackageManager.PERMISSION_DENIED){
+            if(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)){
+            }else{
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+            }
+        }
     }
 }

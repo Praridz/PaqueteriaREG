@@ -1,5 +1,6 @@
 package co.edu.udea.compumovil.gr04_20211.paqueteriareg;
 
+import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
@@ -19,13 +20,23 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private LocationManager locationManager;
-
+    private DatabaseReference databaseReference;
+    private ArrayList<Marker> temporalRealTimeMarkers = new ArrayList<>();
+    private ArrayList<Marker> realTimaMarkers = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +45,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+
     }
 
     @Override
@@ -91,6 +104,38 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         };
         int permiso = ContextCompat.checkSelfPermission(MapsActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION);
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
+        databaseReference.child("destinos").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(Marker dest:realTimaMarkers){
+                    dest.remove();
+                }
+                for(DataSnapshot snapshot: dataSnapshot.getChildren()){
+                    Destinos dt = snapshot.getValue(Destinos.class);
+                    Double latitud = dt.getLatitud();
+                    Double longitud = dt.getLongitud();
+                    String codigo = dt.getCodigo();
+                    String telefono = dt.getTelefono();
 
+                    String paquete = "No. Paquete " + codigo;
+                    String telefonoUno = "Tel. " + telefono;
+
+
+                    MarkerOptions markerOptions = new MarkerOptions();
+
+                    markerOptions.position(new LatLng(latitud, longitud)).title(paquete).snippet(telefonoUno)
+                            .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_entregas));
+
+                    temporalRealTimeMarkers.add(mMap.addMarker(markerOptions));
+                }
+                realTimaMarkers.clear();
+                realTimaMarkers.addAll(temporalRealTimeMarkers);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 }
