@@ -74,7 +74,7 @@ public class RecuperarActivity extends AppCompatActivity {
                 if(task.isSuccessful()){
                     StyleableToast.makeText(getApplicationContext(), "Por favor revise su correo para restaurar contraseña",
                             Toast.LENGTH_LONG, R.style.DemoButton).show();
-                    Intent i = new Intent(RecuperarActivity.this, AdminActivity.class);
+                    Intent i = new Intent(RecuperarActivity.this, LoginClientsActivity.class);
                     startActivity(i);
                     finish();
                 }else

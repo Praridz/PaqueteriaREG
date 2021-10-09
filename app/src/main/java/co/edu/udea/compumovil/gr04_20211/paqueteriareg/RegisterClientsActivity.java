@@ -20,6 +20,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
 import com.muddzdev.styleabletoast.StyleableToast;
 import com.skydoves.elasticviews.ElasticCheckButton;
 
@@ -28,7 +29,7 @@ import java.util.Map;
 
 import dmax.dialog.SpotsDialog;
 
-public class RegistrarActivity extends AppCompatActivity {
+public class RegisterClientsActivity extends AppCompatActivity {
     TextInputEditText email, password;
     private ElasticCheckButton registrar;
     private ProgressDialog progress;
@@ -38,7 +39,15 @@ public class RegistrarActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registrar);
+        setContentView(R.layout.activity_register_clients);
+        //Titulo centrado de la app Action Bar
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setCustomView(R.layout.txt_titulo_nav);
+
+        //Activar boton back
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         registrar = (ElasticCheckButton) findViewById(R.id.btnRegistrase);
         email = findViewById(R.id.gmail);
         password = findViewById(R.id.password);
@@ -47,8 +56,14 @@ public class RegistrarActivity extends AppCompatActivity {
         store = FirebaseFirestore.getInstance();
 
         progress = new ProgressDialog(this);
-        alerta = new SpotsDialog.Builder().setContext(RegistrarActivity.this).setMessage("Por favor espere....").build();
+        alerta = new SpotsDialog.Builder().setContext(RegisterClientsActivity.this).setMessage("Por favor espere....").build();
         registrar();
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 
     private void registrar() {
@@ -66,7 +81,7 @@ public class RegistrarActivity extends AppCompatActivity {
                 }else{
                     alerta.show();
                     auth.createUserWithEmailAndPassword(userE, passE)
-                            .addOnCompleteListener(RegistrarActivity.this, new OnCompleteListener<AuthResult>() {
+                            .addOnCompleteListener(RegisterClientsActivity.this, new OnCompleteListener<AuthResult>() {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if(!task.isSuccessful()){
@@ -74,12 +89,12 @@ public class RegistrarActivity extends AppCompatActivity {
                                                 Toast.LENGTH_LONG, R.style.DemoButton).show();
                                     }else{
                                         FirebaseUser user = auth.getCurrentUser();
-                                        Intent i = new Intent(RegistrarActivity.this, AdminActivity.class);
+                                        Intent i = new Intent(RegisterClientsActivity.this, LoginClientsActivity.class);
                                         StyleableToast.makeText(getApplicationContext(), "Cuenta creada exitosamente",
                                                 Toast.LENGTH_LONG, R.style.DemoButton).show();
                                         DocumentReference df = store.collection("Users").document(user.getUid());
                                         Map<String,Object> userInfo = new HashMap<>();
-                                        userInfo.put("isEmployee", "1");
+                                        userInfo.put("isClient", "1");
                                         userInfo.put("email", userE);
                                         df.set(userInfo);
                                         startActivity(i);

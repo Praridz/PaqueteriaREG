@@ -11,6 +11,9 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MenuAdminActivity extends AppCompatActivity {
     CardView lista, paquete;
@@ -19,9 +22,6 @@ public class MenuAdminActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_admin);
-        //Titulo centrado de la app Action Bar
-        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        getSupportActionBar().setCustomView(R.layout.txt_titulo_nav);
         lista = findViewById(R.id.idvista);
         paquete = findViewById(R.id.idmapa);
         //Activar boton back
@@ -30,6 +30,15 @@ public class MenuAdminActivity extends AppCompatActivity {
         irLista();
         irMapa();
         getLocalizacion();
+        Button logout = findViewById(R.id.btnLogout2);
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(getApplicationContext(),LoginClientsActivity.class));
+                finish();
+            }
+        });
     }
 
     private void irLista() {
@@ -52,11 +61,6 @@ public class MenuAdminActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
-    }
     private void getLocalizacion() {
         int permiso = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION);
         if(permiso == PackageManager.PERMISSION_DENIED){

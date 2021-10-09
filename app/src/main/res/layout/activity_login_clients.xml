@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".RegistrarActivity">
+    tools:context=".LoginClientsActivity">
     <androidx.cardview.widget.CardView
         android:id="@+id/card_view"
         android:layout_width="match_parent"
@@ -23,6 +22,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="20dp"
@@ -30,10 +30,34 @@
                 android:layout_marginRight="15dp"
                 android:layout_marginBottom="25dp"
                 android:gravity="center"
-                android:text="Registro de nuevo empleado"
-                android:textColor="#000"
-                android:textSize="20sp"
+                android:text="- - - - - - - - - - - -"
+                android:textColor="#8E24AA"
+                android:textSize="30sp"
                 android:textStyle="bold" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:id="@+id/imagen"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/user"
+                android:layout_marginBottom="20dp"
+                app:civ_border_width="2dp"
+                app:civ_border_color="@color/black">
+            </de.hdodenhof.circleimageview.CircleImageView>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="#000"
+                android:text="Ingrese Credenciales"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="25dp"
+                android:layout_marginEnd="15dp"
+                android:textSize="20dp"
+                android:layout_marginRight="15dp" />
+
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -58,6 +82,7 @@
                     android:textColorHint="@color/black"
                     android:textColorLink="@color/black"
                     android:textStyle="bold" />
+
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
@@ -86,22 +111,68 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.skydoves.elasticviews.ElasticCheckButton
+                android:id="@+id/btnEnviar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/purple_500"
+                android:text="Iniciar Sesión"
+                android:textColor="#ffff"
+                android:textStyle="bold"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:layout_centerHorizontal="true"
+                app:checkButton_cornerRadius="4dp"
+                app:checkButton_alpha="0.7"
+                app:checkButton_duration="400"
+                app:checkButton_scale="0.9"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:visibility="visible"></LinearLayout>
+
+            <com.skydoves.elasticviews.ElasticCheckButton
                 android:id="@+id/btnRegistrase"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="10dp"
                 android:background="@color/colorBoton1"
-                android:text="Registrar"
+                android:onClick="getRegistrar"
+                android:text="Registrarse (Clientes)"
                 android:textColor="#ffff"
                 android:textStyle="bold"
                 app:checkButton_alpha="0.7"
                 app:checkButton_cornerRadius="4dp"
                 app:checkButton_duration="400"
                 app:checkButton_scale="0.9" />
+
+            <com.skydoves.elasticviews.ElasticCheckButton
+                android:id="@+id/recuperar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="20dp"
+                android:background="@color/black"
+                android:onClick="getRecuperar"
+                android:text="Recuperar Contraseña"
+                android:textColor="#ffff"
+                android:textStyle="bold"
+                app:checkButton_alpha="0.7"
+                app:checkButton_cornerRadius="4dp"
+                app:checkButton_duration="400"
+                app:checkButton_scale="0.9"
+                tools:ignore="OnClick" />
+
         </LinearLayout>
     </androidx.cardview.widget.CardView>
-
 </androidx.core.widget.NestedScrollView>

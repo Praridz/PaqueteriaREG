@@ -7,7 +7,11 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
     private final int DURACION_SPLASH = 6000;
@@ -27,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent myIntent  = new Intent(MainActivity.this, MenuActivity.class);
+                Intent myIntent  = new Intent(MainActivity.this, LoginClientsActivity.class);
                 startActivity(myIntent);
                 finish();
             }

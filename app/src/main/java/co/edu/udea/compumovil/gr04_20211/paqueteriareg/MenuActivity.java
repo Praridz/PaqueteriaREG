@@ -8,6 +8,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.widget.Button;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MenuActivity extends AppCompatActivity {
     CardView paquete, admin, ofertas, condicion;
@@ -28,6 +31,15 @@ public class MenuActivity extends AppCompatActivity {
         getAdmin();
         getOferta();
         getCondicion();
+        Button logout = findViewById(R.id.btnLogout1);
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(getApplicationContext(),LoginClientsActivity.class));
+                finish();
+            }
+        });
     }
 
     private void getPaquete() {

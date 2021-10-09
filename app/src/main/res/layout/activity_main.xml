@@ -13,5 +13,5 @@
     app:lottie_fileName="intro.json"
     app:lottie_loop="true"
     app:lottie_autoPlay="true"/>
-    
+
 </androidx.constraintlayout.widget.ConstraintLayout>

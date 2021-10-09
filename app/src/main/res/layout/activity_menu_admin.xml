@@ -11,16 +11,16 @@
         android:id="@+id/r1"
         android:layout_width="match_parent"
         android:layout_height="50dp">
+
         <TextView
+            android:id="@+id/txtView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/txtView"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            android:textColor="#067bf0"
             android:layout_centerInParent="true"
-            android:text="Bienvenido Administrador">
-        </TextView>
+            android:text="Bienvenido Colaborador"
+            android:textColor="#067bf0"
+            android:textSize="14sp"
+            android:textStyle="bold"></TextView>
     </RelativeLayout>
     <androidx.gridlayout.widget.GridLayout
         android:id="@+id/idGrid"
@@ -84,6 +84,7 @@
             app:layout_columnWeight="1"
             app:layout_rowWeight="1"
             android:foreground="?selectableItemBackground">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -108,6 +109,38 @@
                     android:text="Ver ubicaciones"></TextView>
 
 
+            </LinearLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/idmapa"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/design_default_color_primary_dark"
+            android:foreground="?selectableItemBackground"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="6dp"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/btnLogout2"
+                    android:layout_width="match_parent"
+                    android:layout_height="352dp"
+                    android:text="Cerrar sesión"
+                    android:textColor="#000000"
+                    app:backgroundTint="#FFFFFF" />
             </LinearLayout>
 
 
