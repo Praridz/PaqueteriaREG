@@ -39,9 +39,9 @@
         <activity android:name=".RegistrarActivity" />
         <activity android:name=".MenuAdminActivity" />
         <activity android:name=".RecuperarActivity" />
-        <activity android:name=".OfertaActivity" />
         <activity android:name=".CondicionActivity" />
         <activity android:name=".AdminActivity" />
+        <activity android:name=".ListaPaquetesUsuarioActivity" />
         <activity android:name=".PaqueteActivity" />
         <activity android:name=".MenuActivity" />
         <activity android:name=".MainActivity">

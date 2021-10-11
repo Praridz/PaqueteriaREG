@@ -16,20 +16,20 @@ import android.widget.Button;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class MenuAdminActivity extends AppCompatActivity {
-    CardView lista, paquete;
-
+    CardView lista, paquete, condicion;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_admin);
         lista = findViewById(R.id.idvista);
         paquete = findViewById(R.id.idmapa);
-        //Activar boton back
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        condicion = (CardView) findViewById(R.id.idcard4);
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setCustomView(R.layout.txt_titulo);
         irLista();
         irMapa();
         getLocalizacion();
+        getCondicion();
         Button logout = findViewById(R.id.btnLogout2);
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,5 +69,14 @@ public class MenuAdminActivity extends AppCompatActivity {
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
             }
         }
+    }
+    private void getCondicion() {
+        condicion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MenuAdminActivity.this, CondicionActivity.class);
+                startActivity(i);
+            }
+        });
     }
 }

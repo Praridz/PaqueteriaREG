@@ -20,7 +20,6 @@ public class MenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_menu);
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.txt_titulo);
-
         //Iniciar
         paquete = (CardView) findViewById(R.id.idcard1);
         admin = (CardView) findViewById(R.id.idcard2);
@@ -64,7 +63,7 @@ public class MenuActivity extends AppCompatActivity {
         ofertas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MenuActivity.this, OfertaActivity.class);
+                Intent i = new Intent(MenuActivity.this, ListaPaquetesUsuarioActivity.class);
                 startActivity(i);
             }
         });

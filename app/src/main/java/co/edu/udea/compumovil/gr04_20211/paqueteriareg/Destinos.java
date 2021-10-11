@@ -5,16 +5,20 @@ public class Destinos {
     private Double longitud;
     private String codigo;
     private String telefono;
+    private String correoUser;
+    private String estado;
 
     public Destinos() {
         //super();
     }
 
-    public Destinos(Double latitud, Double longitud, String codigo, String telefono) {
+    public Destinos(Double latitud, Double longitud, String codigo, String telefono, String correoUser, String estado) {
         this.latitud = latitud;
         this.longitud = longitud;
         this.codigo = codigo;
         this.telefono = telefono;
+        this.correoUser = correoUser;
+        this.estado = estado;
     }
 
     public Double getLatitud() {
@@ -47,6 +51,22 @@ public class Destinos {
 
     public void setTelefono(String telefono) {
         this.telefono = telefono;
+    }
+
+    public String getCorreoUser() {
+        return correoUser;
+    }
+
+    public void setCorreoUser(String correoUser) {
+        this.correoUser = correoUser;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 }
 

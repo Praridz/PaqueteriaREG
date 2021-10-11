@@ -37,12 +37,10 @@ public class LoginClientsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_clients);
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        getSupportActionBar().setCustomView(R.layout.txt_titulo_nav);
+        getSupportActionBar().setCustomView(R.layout.txt_titulo);
         mAuth = FirebaseAuth.getInstance();
         store = FirebaseFirestore.getInstance();
         //Activar boton back
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         recuperar = (ElasticCheckButton) findViewById(R.id.recuperar);
         btnEnviar = (ElasticCheckButton) findViewById(R.id.btnEnviar);

@@ -4,7 +4,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-
+import com.google.firebase.auth.FirebaseAuth;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.muddzdev.styleabletoast.StyleableToast;
@@ -58,6 +59,7 @@ public class PaqueteActivity extends AppCompatActivity {
                 String logitud = edtLong.getText().toString().trim();
                 String codigo = edtcodigo.getText().toString().trim();
                 String telefono = edttelefono.getText().toString().trim();
+                String estado = "En sede";
 
                 if(TextUtils.isEmpty(latitud)){
                     StyleableToast.makeText(getApplicationContext(), "Por favor Pulsar el Boton Generar Ubicacion",
@@ -72,9 +74,10 @@ public class PaqueteActivity extends AppCompatActivity {
                     StyleableToast.makeText(getApplicationContext(), "Por favor Ingresar un numero de Telefono",
                             Toast.LENGTH_LONG, R.style.DemoButton).show();
                 }else{
-                    Destinos destinos = new Destinos(Double.valueOf(latitud),Double.valueOf(logitud), codigo, telefono);
+                    Destinos destinos = new Destinos(Double.valueOf(latitud),Double.valueOf(logitud), codigo, telefono, FirebaseAuth.getInstance().getCurrentUser().getEmail(), estado);
 
                     databaseReference.child("destinos").child(codigo).setValue(destinos);
+
                     StyleableToast.makeText(getApplicationContext(), "Datos Enviados Correctamente",
                             Toast.LENGTH_LONG, R.style.DemoButton).show();
                     Intent i = new Intent(PaqueteActivity.this, MenuActivity.class);

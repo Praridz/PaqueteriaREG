@@ -48,23 +48,24 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal|center_vertical"
                 android:orientation="vertical">
+
                 <ImageView
                     android:layout_width="wrap_content"
-                    android:layout_height="90dp"
+                    android:layout_height="100dp"
                     android:layout_gravity="center_horizontal"
-                    android:src="@drawable/notas"
-                    ></ImageView>
+                    android:src="@drawable/notas"></ImageView>
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
                     android:layout_centerHorizontal="true"
                     android:layout_gravity="center_horizontal"
+                    android:text="Editar entregas"
                     android:textAlignment="center"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
                     android:textColor="#067bf0"
-                    android:layout_centerInParent="true"
-                    android:text="Eliminar entregas"></TextView>
+                    android:textSize="16sp"
+                    android:textStyle="bold"></TextView>
 
 
             </LinearLayout>
@@ -113,7 +114,49 @@
 
 
         </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:id="@+id/idcard4"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/design_default_color_primary_dark"
+            android:foreground="?selectableItemBackground"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="6dp"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="90dp"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/condiciones"></ImageView>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Terminos y \ncondiciones"
+                    android:textAlignment="center"
+                    android:textColor="#067bf0"
+                    android:textSize="16sp"
+                    android:textStyle="bold"></TextView>
+
+
+            </LinearLayout>
+
+
+        </androidx.cardview.widget.CardView>
         <androidx.cardview.widget.CardView
             android:id="@+id/idmapa"
             android:layout_width="0dp"
